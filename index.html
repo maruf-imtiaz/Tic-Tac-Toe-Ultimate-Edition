@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/000000/controller.png">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onclick="if(typeof AudioContext !== 'undefined') new AudioContext().resume();">
+    <div class="area">
+        <ul class="circles">
+            <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div style="position: absolute; top: 15px; right: 15px;">
+            <button onclick="toggleSettings()" style="background:none; border:none; font-size:1.5rem; width:auto; cursor:pointer;">⚙️</button>
+        </div>
+
+        <div class="game-icon">
+            <img src="https://img.icons8.com/fluency/96/000000/controller.png" alt="Gamer Icon">
+        </div>
+
+        <div id="menu" class="screen">
+            <h1>Tic Tac Toe</h1>
+            <p>Select Game Mode</p>
+            <button onclick="showInputScreen('cpu')">Play with Computer</button>
+            <button onclick="showInputScreen('pvp')">Person vs Person</button>
+        </div>
+
+        <div id="input-screen" class="screen hidden">
+            <h2 id="mode-title">Enter Details</h2>
+            <div id="inputs">
+                <input type="text" id="p1-name" placeholder="Player 1 Name (X)">
+                <input type="text" id="p2-name" placeholder="Player 2 Name (O)" style="display: none;">
+                <div id="difficulty-selector" style="margin-top: 10px; display: none;">
+                    <select id="ai-difficulty" style="padding: 12px; width: 100%; border-radius: 8px; background: #1e1e2f; color: white; border: 2px solid #3e3e5e;">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard" selected>Hard</option>
+                    </select>
+                </div>
+            </div>
+            <button onclick="startGame()">Start Game</button>
+            <button onclick="location.reload()" style="background: #666;">Back</button>
+        </div>
+
+        <div id="game-screen" class="screen hidden">
+            <div class="scoreboard">
+                <div id="p1-display" class="player-box"></div>
+                <div id="p2-display" class="player-box"></div>
+            </div>
+            <div class="board" id="board">
+                <div class="cell" data-index="0"></div><div class="cell" data-index="1"></div><div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div><div class="cell" data-index="4"></div><div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div><div class="cell" data-index="7"></div><div class="cell" data-index="8"></div>
+            </div>
+            <button onclick="location.reload()" class="reset-btn">Quit Game</button>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="hidden" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; display:flex; justify-content:center; align-items:center;">
+        <div style="background:#2b2b3d; padding:30px; border-radius:20px; border:1px solid #3e3e5e; width:280px; text-align:center;">
+            <h3>Settings</h3>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin:20px 0;">
+                <span>Sound Effects</span>
+                <button id="sound-btn" onclick="toggleSoundState()" style="width:80px; padding:5px; font-size:0.8rem; margin:0;">ON</button>
+            </div>
+            <button onclick="showAbout()" style="background:#4e54c8; margin-bottom:10px;">About</button>
+            <button onclick="toggleSettings()" style="background:#666;">Close</button>
+        </div>
+    </div>
+
+    <script src="logic.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
